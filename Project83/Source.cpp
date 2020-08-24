@@ -12,7 +12,8 @@ public:									                                                                
 	int number_f;						                                                                   // MAX
 	char forma_f[4][4];					                                                                   // MAX
 										                                                                   // MAX
-};										                                                                   // MAX
+};	
+//NAZARS CHANGES !!!! DONT DELETE THIS:-))))
 																										   // MAX
 void arena_tetris(char arena_mass[20][12]) // sama arena												   // MAX
 {																										   // MAX
