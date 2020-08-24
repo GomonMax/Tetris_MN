@@ -14,6 +14,7 @@ public:									                                                                
 										                                                                   // MAX
 };	
 //NAZARS CHANGES !!!! DONT DELETE THIS:-))))
+//very important pease of code
 																										   // MAX
 void arena_tetris(char arena_mass[20][12]) // sama arena												   // MAX
 {																										   // MAX
