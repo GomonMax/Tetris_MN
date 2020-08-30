@@ -1,0 +1,6 @@
+﻿1>------ Сборка начата: проект: Project94, Конфигурация: Debug x64 ------
+1>Source.cpp
+1>D:\samting xyina\steap\git\tetris\Tetris_MN\Project94\Source.cpp(752,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+1>Project94.vcxproj -> D:\samting xyina\steap\git\tetris\Tetris_MN\x64\Debug\Project94.exe
+1>Сборка проекта "Project94.vcxproj" завершена.
+========== Сборка: успешно: 1, с ошибками: 0, без изменений: 0, пропущено: 0 ==========

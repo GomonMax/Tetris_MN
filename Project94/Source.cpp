@@ -1,9 +1,10 @@
-#include <iostream>
+﻿#include <iostream>
 #include <windows.h>
 #include <conio.h>
 #include <ctime>
 #include <iomanip>
 using namespace std;
+void padannya_random();
 
 // MAX 
 class figuri							                                                                
@@ -43,130 +44,800 @@ void show_arena_tetris(char arena_mass[20][12], int score) // vivod areni
 	cout << "\n" << endl;
 	cout << "Score: " << score << endl;
 }																										
-																										
 
-void palka_fall(char arena_mass[20][12], int score) {
-	int h = 0;			
-		for (int i = 0; i < 20; i++)
-		{
-			if ((arena_mass[h][0] == '0') && (arena_mass[h][0] != '1'))
-			{
-			show_arena_tetris(arena_mass, score);
-			arena_mass[h][0] = '1';
-			arena_mass[h - 4][0] = '0';
-			Sleep(1);
-			h++;
-			system("cls");
-		    }
-	    }
-	show_arena_tetris(arena_mass, score);
-}																										
+void palka_fall(char arena_mass[20][12], int score) 
+{
+	int h = 0;
+	int d = 0;
+	
+	for (int i = 0; i <= 20; i++)
+	{
+		if ((arena_mass[h][d] == '0') && (arena_mass[h][d] != '1'))
+		{			
+				if (_kbhit())
+				{
+					switch (_getch())
+					{
+					case 'd':
+					{
+						d++;
+						arena_mass[h - 1][d - 1] = '0';
+						arena_mass[h - 2][d - 1] = '0';
+						arena_mass[h - 3][d - 1] = '0';
+						arena_mass[h - 4][d - 1] = '0';
+						break;
+					}
+					case 'a':
+					{
+						d--;
+						arena_mass[h - 1][d + 1] = '0';
+						arena_mass[h - 2][d + 1] = '0';
+						arena_mass[h - 3][d + 1] = '0';
+						arena_mass[h - 4][d + 1] = '0';
+						break;
+					}
+					case 'r':
+					{
+						int r = 0;
+						r++;
+						for (int j = 0; i < 20; i++)
+						{
+						if (!(r % 2) == 0)
+						{
+				     	
+							if ((arena_mass[h][d] == '0') && (arena_mass[h][d + 1] == '0') && (arena_mass[h][d + 2] == '0') && (arena_mass[h][d + 3] == '0'))
+							{
+								
+									if (_kbhit())
+									{
+										switch (_getch())
+										{
+										case'r': 
+										{
+											r++;
+										break;
+										}
+										}
+									} 
+									for (int o = 0; o < 1; o++)
+									{
+										arena_mass[h - 1][d] = '0';
+										arena_mass[h - 2][d] = '0';
+										arena_mass[h - 3][d] = '0';
+										arena_mass[h - 4][d] = '0';
+									}
+									arena_mass[h][d] = '#';
+									arena_mass[h][d + 1] = '#';
+									arena_mass[h][d + 2] = '#';
+									arena_mass[h][d + 3] = '#';
+									arena_mass[h - 1][d] = '0';
+									arena_mass[h - 1][d + 1] = '0';
+									arena_mass[h - 1][d + 2] = '0';
+									arena_mass[h - 1][d + 3] = '0';
+									h++;
+									show_arena_tetris(arena_mass, score);
+									Sleep(250);
+									if (_kbhit())
+									{
+										switch (_getch())
+										{
+										case 'd':
+										{
+											d++;
+											arena_mass[h-1][d - 1] = '0';
+											
+											break;
+										}
+										case 'a':
+										{
+											d--;
+											arena_mass[h-1][d + 4] = '0';
+											break;
+										}
+										}
+									}
+									system("cls");
+							}
+							
+						}
+						else
+						{
+							if ((arena_mass[h][d] == '0') && (arena_mass[h][d + 1] == '0') && (arena_mass[h][d + 2] == '0') && (arena_mass[h][d + 3] == '0'))
+							{
+								show_arena_tetris(arena_mass, score);
+								arena_mass[h - 1][d + 1] = '0';
+								arena_mass[h - 1][d + 2] = '0';
+								arena_mass[h - 1][d + 3] = '0';
+								arena_mass[h][d] = '#';
+								arena_mass[h - 4][d] = '0';
+								Sleep(250);
+								h++;
+								system("cls");
+								if (_kbhit())
+								{
+									switch (_getch())
+									{
+									case 'd':
+									{
+										d++;
+										arena_mass[h - 1][d - 1] = '0';
+										arena_mass[h - 2][d - 1] = '0';
+										arena_mass[h - 3][d - 1] = '0';
+										arena_mass[h - 4][d - 1] = '0';
+										break;
+									}
+									case 'a':
+									{
+										d--;
+										arena_mass[h - 1][d + 1] = '0';
+										arena_mass[h - 2][d + 1] = '0';
+										arena_mass[h - 3][d + 1] = '0';
+										arena_mass[h - 4][d + 1] = '0';
+										break;
+									}
+									}
+								}
+							}
+						}
+						}
+						
+					
+						break;
+					}
+					}
+				}
+	    	show_arena_tetris(arena_mass, score);
+	    	arena_mass[h][d] = '#';
+	    	arena_mass[h - 4][d] = '0';
+	    	Sleep(250);
+	    	h++;
+	    	system("cls");
+		}
+	}
+		show_arena_tetris(arena_mass, score);
+}
 																										
 void kybik_fall(char arena_mass[20][12], int score)
-{																
-	int h = 0;																							
-	for (int i = 0; i < 20; i++)																		
-	{	
-		if ((arena_mass[h][0] != '1') && (arena_mass[h][1] != '1'))
+{
+	int h = 0;
+	int d = 0;
+	
+	for (int i = 0; i <= 20; i++)
+	{
+		if ((arena_mass[h][d] == '0') && (arena_mass[h][d] == '0'))
 		{
+			if (_kbhit())
+			{
+				switch (_getch())
+				{
+				case 'd':
+				{
+					d++;
+					arena_mass[h - 1][d - 1] = '0';
+					arena_mass[h - 2][d - 1] = '0';
+					arena_mass[h][d] = '#';
+					arena_mass[h][d + 1] = '#';
+					arena_mass[h - 2][d] = '0';
+					arena_mass[h - 2][d + 1] = '0';
+					break;
+				}
+				case 'a':
+				{
+					d--;
+					arena_mass[h - 1][d + 2] = '0';
+					arena_mass[h - 2][d + 2] = '0';
+					arena_mass[h][d] = '#';
+					arena_mass[h][d + 1] = '#';
+					arena_mass[h - 2][d] = '0';
+					arena_mass[h - 2][d + 1] = '0';
+					break;
+				}
+				}
+			}
 			show_arena_tetris(arena_mass, score);
-			arena_mass[h][0] = '1';
-			arena_mass[h][1] = '1';
-			arena_mass[h - 2][0] = '0';
-			arena_mass[h - 2][1] = '0';
-			Sleep(20);
+			arena_mass[h][d] = '#';
+			arena_mass[h][d + 1] = '#';
+			arena_mass[h - 2][d] = '0';
+			arena_mass[h - 2][d + 1] = '0';
+			Sleep(250);
 			h++;
 			system("cls");
 		}
-	}																									
-	show_arena_tetris(arena_mass, score);
-}																										 
-																										 
+	}		
+}
+
 void geska_fall(char arena_mass[20][12], int score)
 {																 
-	int h = 0;																							 
-	for (int i = 0; i < 20; i++)																		 
+	int h = 0;	
+	int d = 0;
+	int r = 0;
+	int w = 0;
+	int q = 0;
+	for (int i = 0; i <= 20; i++)																		 
 	{		
-		if ((arena_mass[h][0] == '0') && (arena_mass[h][1] == '0'))
+		if ((arena_mass[h][d] == '0') && (arena_mass[h][d+1] == '0'))
 		{
+			if (_kbhit())
+			{
+				switch (_getch())
+				{
+				case 'd':
+				{
+					d++;
+					arena_mass[h - 1][d - 1] = '0';	
+					arena_mass[h][d] = '#';
+					arena_mass[h][d + 1] = '#';
+					arena_mass[h - 3][d] = '0';
+					arena_mass[h - 3][d + 1] = '0';
+					arena_mass[h - 2][d] = '0';
+					arena_mass[h - 1][d] = '0';
+					break;
+				}
+				case 'a':
+				{
+					d--;
+					arena_mass[h - 1][d + 2] = '0';
+					arena_mass[h - 2][d + 2] = '0';
+					arena_mass[h - 3][d + 2] = '0';
+					arena_mass[h][d] = '#';
+					arena_mass[h][d + 1] = '#';
+					arena_mass[h - 3][d] = '0';
+					arena_mass[h - 3][d + 1] = '0';
+					arena_mass[h - 2][d] = '0';
+					arena_mass[h - 1][d] = '0';
+					break;
+				}
+				case 'r':
+				{
+					r++;
+					if (r == 1)
+					{
+
+						arena_mass[h - 3][d + 1] = '0';
+						arena_mass[h - 2][d + 1] = '0';
+						arena_mass[h - 2][d + 2] = '0';
+						for (int j = 0; i <= 19; i++)
+						{
+							if (_kbhit())
+							{
+								switch (_getch())
+								{
+								case'r':
+								{
+									r++;
+									break;
+								}
+
+								}
+							}
+							if ((arena_mass[h][d] == '0') && (arena_mass[h][d + 1] == '0') && (arena_mass[h][d + 2] == '0'))
+							{
+
+								///////////////
+								arena_mass[h][d] = '#';
+								arena_mass[h - 1][d] = '#';
+								arena_mass[h - 2][d] = '#';
+								arena_mass[h - 1][d + 1] = '#';
+								arena_mass[h - 3][d] = '0';
+								arena_mass[h - 2][d + 1] = '0';
+								arena_mass[h - 2][d + 2] = '0';
+
+								show_arena_tetris(arena_mass, score);
+								h++;
+								Sleep(250);
+								if (_kbhit())
+								{
+									switch (_getch())
+									{
+									case 'd':
+									{
+										d++;
+										arena_mass[h - 1][d - 1] = '0';
+										arena_mass[h - 2][d - 1] = '0';
+										arena_mass[h - 3][d - 1] = '0';
+										break;
+									}
+									case 'a':
+									{
+										d--;
+										arena_mass[h - 1][d + 4] = '0';
+										arena_mass[h - 3][d + 1] = '0';
+
+										break;
+									}
+									}
+								}
+								system("cls");
+							}
+						}
+					}
+
+					break;
+				}
+				case 'w':
+				{
+					w++;
+					if (w == 1)
+					{
+
+						arena_mass[h - 3][d + 1] = '0';
+						arena_mass[h - 2][d + 1] = '0';
+						arena_mass[h - 2][d + 2] = '0';
+						for (int j = 0; i <= 19; i++)
+						{
+							if (_kbhit())
+							{
+								switch (_getch())
+								{
+								case'r':
+								{
+									r++;
+									break;
+								}
+
+								}
+							}
+							if ((arena_mass[h + 1][d] == '0') && (arena_mass[h + 1][d + 1] == '0') && (arena_mass[h + 1][d + 2] == '0'))
+							{
+
+								///////////////
+								arena_mass[h][d] = '#';
+								arena_mass[h][d + 1] = '#';
+								arena_mass[h + 1][d + 1] = '#';
+								arena_mass[h][d + 2] = '#';
+								arena_mass[h - 1][d] = '0';
+								arena_mass[h - 1][d + 1] = '0';
+								arena_mass[h - 1][d + 2] = '0';
+
+								show_arena_tetris(arena_mass, score);
+								h++;
+								Sleep(250);
+								if (_kbhit())
+								{
+									switch (_getch())
+									{
+									case 'd':
+									{
+										d++;
+										arena_mass[h][d - 4] = '0';
+										arena_mass[h - 1][d - 1] = '0';
+
+										break;
+									}
+									case 'a':
+									{
+										d--;
+										arena_mass[h][d + 4] = '0';
+										arena_mass[h][d] = '0';
+										arena_mass[h - 1][d + 1] = '0';
+										break;
+									}
+									}
+								}
+								system("cls");
+							}
+						}
+					}
+
+					break;
+				}
+				case 'q':
+				{
+					q++;
+					if (q == 1)
+					{
+
+						arena_mass[h - 3][d + 1] = '0';
+						arena_mass[h - 2][d + 1] = '0';
+						arena_mass[h - 2][d + 2] = '0';
+						for (int j = 0; i <= 19; i++)
+						{
+							if (_kbhit())
+							{
+								switch (_getch())
+								{
+								case'r':
+								{
+									r++;
+									break;
+								}
+
+								}
+							}
+							if ((arena_mass[h][d] == '0') && (arena_mass[h][d + 1] == '0') && (arena_mass[h][d + 2] == '0'))
+							{
+
+								///////////////
+								arena_mass[h][d] = '#';
+								arena_mass[h - 1][d] = '#';
+								arena_mass[h - 2][d] = '#';
+								arena_mass[h - 1][d - 1] = '#';
+								arena_mass[h - 3][d] = '0';
+								arena_mass[h - 2][d - 1] = '0';
+								arena_mass[h - 2][d + 2] = '0';
+
+								show_arena_tetris(arena_mass, score);
+								h++;
+								Sleep(250);
+								if (_kbhit())
+								{
+									switch (_getch())
+									{
+									case 'd':
+									{
+										d++;
+										arena_mass[h - 2][d - 2] = '0';
+										arena_mass[h - 3][d - 1] = '0';
+										break;
+									}
+									case 'a':
+									{
+										d--;
+										arena_mass[4 - 1][d - 1] = '0';
+
+										arena_mass[h - 1][d + 1] = '0';
+										arena_mass[h - 2][d + 1] = '0';
+										arena_mass[h - 3][d + 1] = '0';
+										break;
+									}
+									}
+								}
+								system("cls");
+							}
+						}
+					}
+
+					break;
+				}
+
+				}
+				}
+			}
 			show_arena_tetris(arena_mass, score);
-			arena_mass[h][0] = '1';
-			arena_mass[h][1] = '1';
-			arena_mass[h - 3][0] = '0';
-			arena_mass[h - 3][1] = '0';
-			arena_mass[h - 2][0] = '0';
-			arena_mass[h - 1][0] = '0';
-			Sleep(20);
+			arena_mass[h][d] = '#';
+			arena_mass[h][d + 1] = '#';
+			arena_mass[h - 3][d] = '0';
+			arena_mass[h - 3][d + 1] = '0';
+			arena_mass[h - 2][d] = '0';
+			arena_mass[h - 1][d] = '0';
+			Sleep(250);
 			h++;
 			system("cls");
 		}
-	}																									 
+																										 
 	show_arena_tetris(arena_mass, score);
 }																										 
 																										 
-void piramidka_fall(char arena_mass[20][12], int score) 
-{															 
-	int h = 0;																							 
-	for (int i = 0; i < 20; i++)																		 
-	{					
-		if ((arena_mass[h][0] == '0') && (arena_mass[h][1] == '0') && (arena_mass[h][2] == '0' ))
+void piramidka_fall(char arena_mass[20][12], int score)
+{
+	int r = 0;
+	int w = 0;
+	int q = 0;
+	int h = 0;
+	int d = 0;
+	for (int i = 0; i <= 20; i++)
+	{
+		
+		if ((arena_mass[h][d] == '0') && (arena_mass[h][d + 1] == '0') && (arena_mass[h][d + 2] == '0'))
 		{
-			show_arena_tetris(arena_mass, score);
-			arena_mass[h][0] = '1';
-			arena_mass[h][1] = '1';
-			arena_mass[h][2] = '1';
-			arena_mass[h - 1][0] = '0';
-			arena_mass[h - 2][1] = '0';
-			arena_mass[h - 1][2] = '0';
-			Sleep(20);
-			h++;
-			system("cls");
+			if (_kbhit())
+			{
+				switch (_getch())
+				{
+				case 'd':
+				{
+					d++;
+					arena_mass[h - 1][d - 1] = '0';
+					arena_mass[h - 2][d] = '0';
+					arena_mass[h][d] = '#';
+					arena_mass[h][d + 1] = '#';
+					arena_mass[h][d + 2] = '#';
+					arena_mass[h - 1][d] = '0';
+					arena_mass[h - 2][d + 1] = '0';
+					arena_mass[h - 1][d + 2] = '0';
+					break;
+				}
+				case 'a':
+				{
+					d--;
+					arena_mass[h - 1][d + 3] = '0';
+					arena_mass[h - 2][d + 2] = '0';
+					arena_mass[h][d] = '#';
+					arena_mass[h][d + 1] = '#';
+					arena_mass[h][d + 2] = '#';
+					arena_mass[h - 1][d] = '0';
+					arena_mass[h - 2][d + 1] = '0';
+					arena_mass[h - 1][d + 2] = '0';
+					break;
+				}
+				case 'r':
+				{
+					r++;
+					if (r == 1)
+					{
+						
+						arena_mass[h - 3][d + 1] = '0';
+						arena_mass[h - 2][d + 1] = '0';
+						arena_mass[h - 2][d + 2] = '0';
+						for (int j = 0; i <= 19; i++)
+						{
+							if (_kbhit())
+							{
+								switch (_getch())
+								{
+								case'r':
+								{
+									r++;
+									break;
+								}
+								
+								}
+							}
+							if ((arena_mass[h][d] == '0') && (arena_mass[h][d + 1] == '0') && (arena_mass[h][d + 2] == '0'))
+							{
+								
+								///////////////
+								arena_mass[h][d] = '#';
+								arena_mass[h - 1][d] = '#';
+								arena_mass[h - 2][d] = '#';
+								arena_mass[h - 1][d + 1] = '#';
+								arena_mass[h - 3][d] = '0';
+								arena_mass[h - 2][d + 1] = '0';
+								arena_mass[h - 2][d + 2] = '0';
+								
+								show_arena_tetris(arena_mass, score);
+								h++;
+								Sleep(250);
+								if (_kbhit())
+								{
+									switch (_getch())
+									{
+									case 'd':
+									{
+										d++;
+										arena_mass[h - 1][d - 1] = '0';
+										arena_mass[h - 2][d - 1] = '0';
+										arena_mass[h - 3][d - 1] = '0';
+										break;
+									}
+									case 'a':
+									{
+										d--;
+										arena_mass[h - 1][d + 4] = '0';
+										arena_mass[h - 3][d + 1] = '0';
+									
+										break;
+									}
+									}
+								}
+								system("cls");
+							}
+						}
+					}
+					
+					break;
+                }
+                 case 'w':
+				 {
+					w++;
+					 if (w == 1)
+					 {
+
+						 arena_mass[h - 3][d + 1] = '0';
+						 arena_mass[h - 2][d + 1] = '0';
+						 arena_mass[h - 2][d + 2] = '0';
+						 for (int j = 0; i <= 19; i++)
+						 {
+							 if (_kbhit())
+							 {
+								 switch (_getch())
+								 {
+								 case'r':
+								 {
+									 r++;
+									 break;
+								 }
+
+								 }
+							 }
+							 if ((arena_mass[h+1][d] == '0') && (arena_mass[h+1][d + 1] == '0') && (arena_mass[h+1][d + 2] == '0'))
+							 {
+
+								 ///////////////
+								 arena_mass[h][d] = '#';
+								 arena_mass[h][d + 1] = '#';
+								 arena_mass[h+1][d + 1] = '#';
+								 arena_mass[h][d + 2] = '#';								
+								 arena_mass[h - 1][d] = '0';
+								 arena_mass[h - 1][d + 1] = '0';
+								 arena_mass[h - 1][d + 2] = '0';
+
+								 show_arena_tetris(arena_mass, score);
+								 h++;
+								 Sleep(250);
+								 if (_kbhit())
+								 {
+									 switch (_getch())
+									 {
+									 case 'd':
+									 {
+										 d++;
+										 arena_mass[h][d - 4] = '0';
+										 arena_mass[h-1][d - 1] = '0';
+
+										 break;
+									 }
+									 case 'a':
+									 {
+										 d--;
+										 arena_mass[h][d + 4] = '0';
+										 arena_mass[h][d] = '0';
+										 arena_mass[h - 1][d + 1] = '0';
+										 break;
+									 }
+									 }
+								 }
+								 system("cls");
+							 }
+						 }
+					 }
+
+					 break;
+				 }
+				 case 'q':
+				 {
+					 q++;
+					 if (q == 1)
+					 {
+
+						 arena_mass[h - 3][d + 1] = '0';
+						 arena_mass[h - 2][d + 1] = '0';
+						 arena_mass[h - 2][d + 2] = '0';
+						 for (int j = 0; i <= 19; i++)
+						 {
+							 if (_kbhit())
+							 {
+								 switch (_getch())
+								 {
+								 case'r':
+								 {
+									 r++;
+									 break;
+								 }
+
+								 }
+							 }
+							 if ((arena_mass[h][d] == '0') && (arena_mass[h][d + 1] == '0') && (arena_mass[h][d + 2] == '0'))
+							 {
+
+								 ///////////////
+								 arena_mass[h][d] = '#';
+								 arena_mass[h - 1][d] = '#';
+								 arena_mass[h - 2][d] = '#';
+								 arena_mass[h - 1][d - 1] = '#';
+								 arena_mass[h - 3][d] = '0';
+								 arena_mass[h - 2][d - 1] = '0';
+								 arena_mass[h - 2][d + 2] = '0';
+
+								 show_arena_tetris(arena_mass, score);
+								 h++;
+								 Sleep(250);
+								 if (_kbhit())
+								 {
+									 switch (_getch())
+									 {
+									 case 'd':
+									 {
+										 d++;
+										 arena_mass[h - 2][d - 2] = '0';
+										 arena_mass[h - 3][d - 1] = '0';
+										 break;
+									 }
+									 case 'a':
+									 {
+										 d--;
+										 arena_mass[4 - 1][d - 1] = '0';
+										
+										 arena_mass[h - 1][d + 1] = '0';
+										 arena_mass[h - 2][d + 1] = '0';
+										 arena_mass[h - 3][d + 1] = '0';
+										 break;
+									 }
+									 }
+								 }
+								 system("cls");
+							 }
+						 }
+					 }
+
+					 break;
+				 }
+				
+                }
+			}
+		
+	       show_arena_tetris(arena_mass, score);
+		   if ((r == 0) && (w == 0) && (q == 0))
+		   {
+		   arena_mass[h][d] = '#';
+			arena_mass[h][d + 1] = '#';
+			arena_mass[h][d + 2] = '#';
+			arena_mass[h - 1][d] = '0';
+			arena_mass[h - 2][d + 1] = '0';
+			arena_mass[h - 1][d + 2] = '0';
+		   }
+		h++;
+		Sleep(250);
+		system("cls");
+	
 		}
+
 	}																									 
 	show_arena_tetris(arena_mass, score);
 }
 
-
-void win_stirannya(char arena_mass[20][12], int score)
+int win_stirannya(char arena_mass[20][12], int score)
 {
-	for (int i = 0; i <= 20; i++)
+	int perevirk;
+	int nada = 0;
+
+	for (int i = 20; i > 0; i--)
 	{
-		int perevirk = 0; // skilki zirok v radu
-		for (int j = 0; j <= 12; j++)
+		perevirk = 0;
+		for (int j = 0; j < 12; j++)
 		{
-			if (arena_mass[i][j] == '1')
+			if (arena_mass[i][j] == '#')
 			{
 				perevirk++;
 			}
 			if (perevirk == 12)
 			{
-				cout << endl;
-				cout << endl;
-				cout << "+100 score" << endl;
-				score += 100;
-				for (int k = i; k <= 20 - i; k++)
+				nada = i;
+				for (int h = 0; h < 1; h++)
 				{
-					for (int u = 0; u <= 12; u++)
+					for (int k = 0; k < 12; k++)
 					{
-						arena_mass[k][u] = '0';
+						arena_mass[nada][k] = '0';
+						score += 85;
+					}
+					for (int k = 0; k < 12; k++)
+					{					
+						arena_mass[nada][k] = arena_mass[nada-1][k];
 					}
 				}
 			}
-		}
+		}	
 	}
+	return score;
 }
 
+void kapusta(int score, char arena_mass[20][12])
+{
+	int i = 0;
+		for (int j = 0; j < 12; j++)
+		{
+			if (arena_mass[i][j] == '#')
+			{
+				cout << "You lose | Score: " << score << endl;
+				Sleep(1000);
+				system("cls");
+
+			}
+		}
+	
+}
 
 void padannya_random(char arena_mass[20][12], int score)
 {
-	int n = 4;
+	int n = 2;
 	while (_kbhit() != ('a'))
 	{
-		n = rand() % 5 + 0;
+		//n = rand() % 5 + 0;
 		if (n == 1)
 		{
 			Sleep(10);
 			system("cls");
+			kapusta(score, arena_mass);
 			piramidka_fall(arena_mass, score); // piramidka
 			win_stirannya(arena_mass, score);
 		}
@@ -174,6 +845,7 @@ void padannya_random(char arena_mass[20][12], int score)
 		{
 			Sleep(10);
 			system("cls");
+			kapusta(score, arena_mass);
 			geska_fall(arena_mass, score); // geska
 			win_stirannya(arena_mass, score);
 		}
@@ -181,6 +853,7 @@ void padannya_random(char arena_mass[20][12], int score)
 		{
 			Sleep(10);
 			system("cls");
+			kapusta(score, arena_mass);
 			kybik_fall(arena_mass, score); // kubik
 			win_stirannya(arena_mass, score);
 		}
@@ -188,6 +861,7 @@ void padannya_random(char arena_mass[20][12], int score)
 		{
 			Sleep(10);
 			system("cls");
+			kapusta(score, arena_mass);
 			palka_fall(arena_mass, score);
 			win_stirannya(arena_mass, score);
 		}
@@ -197,6 +871,7 @@ void padannya_random(char arena_mass[20][12], int score)
 	}
 
 }
+
 
 void menu(char arena_mass[20][12], int score)
 {
@@ -241,6 +916,7 @@ void menu(char arena_mass[20][12], int score)
 	}
 }
 
+
 void create_f()																							  
 {																										  
 	//Figuri vsi																						  
@@ -280,7 +956,8 @@ void create_f()
 	}																									  
 																										  
 }																										  
-																										  
+
+
 int main(figuri NOZHKA, figuri kvadrat)																	  
 {																										  
 	char arena_mass[20][12]; // massiv dlya vzaemodii i pobuduvannya areni								  
